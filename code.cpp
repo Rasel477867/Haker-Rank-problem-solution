@@ -28,16 +28,19 @@ int main()
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll a,b,i;
-    cin>>a>>b;
-    ll j,ans=0;
-    for(i=a; i<=b;i++)
+    unsigned int n,a,i,b,t;
+    cin>>t;
+     while(t--)
     {
-        for(j=i; j<=b; j++)
+        cin>>n;
+        for(i=0; i<32; i++)
         {
-            ans=max(ans,i^j);
+            a=(n^(1<<i));
+            n=a;
+
+
         }
+        cout<<n<<endl;
     }
-    cout<<ans;
   return 0;
 }
