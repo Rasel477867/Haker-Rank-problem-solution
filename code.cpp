@@ -4,7 +4,7 @@
 #include <iostream>
 #include<bits/stdc++.h>
 #define endl '\n'
-#define ll long long int
+#define ll  unsigned long long int
 #define pb push_back
 using namespace __gnu_pbds;
 using namespace std;
@@ -17,20 +17,52 @@ ordered_multiset s;
 vector<ll>v;
 map<char,ll>m;
 int ar[32];
-
+ll fun(ll num)
+{
+    ll i=0;
+    while(num!=1)
+    {
+        num/=2;
+        i++;
+    }
+   return i;
+}
 int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ll n,a,c,i;
-    cin>>n;
-    c=0;
-    for(i=0; i<n; i++)
+    ll n,a,c,i,t;
+    cin>>t;
+    while(t--)
     {
-        cin>>a;
-        c=c^a;
+        cin>>n;
+        c=0;
+        while(n!=1)
+        {
+            if(n&(n-1))
+            {
+            a=fun(n);
+            ll b=1<<a;
+            n=n-b;
+            }
+            else{
+
+             n=n>>1;
+            }
+            c++;
+
+        }
+        if(c%2==1)
+        {
+            cout<<"Louise"<<endl;
+        }
+        else{
+            cout<<"Richard"<<endl;
+        }
     }
-    cout<<c;
+
+
+
   return 0;
 }
