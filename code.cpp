@@ -13,34 +13,24 @@ typedef tree<long long int, null_type, less_equal<long long int>, rb_tree_tag,
         tree_order_statistics_node_update>
         ordered_multiset;
 ordered_multiset s;
-ordered_multiset :: iterator it;
+//ordered_multiset :: iterator it;
 vector<ll>v;
-bool cheak(ll n,ll a)
-{
-    return(n&(1<<a));
-}
-ll bset(ll n,ll i)
-{
-    return(n|(1<<i));
-}
+map<char,ll>m;
+int ar[32];
+
 int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    unsigned int n,a,i,b,t;
-    cin>>t;
-     while(t--)
+    ll n,a,c,i;
+    cin>>n;
+    c=0;
+    for(i=0; i<n; i++)
     {
-        cin>>n;
-        for(i=0; i<32; i++)
-        {
-            a=(n^(1<<i));
-            n=a;
-
-
-        }
-        cout<<n<<endl;
+        cin>>a;
+        c=c^a;
     }
+    cout<<c;
   return 0;
 }
