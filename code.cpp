@@ -21,10 +21,7 @@ const ll mod=1e9+7;
 const ll N=1e1;
 bool sive[N];
 vector<ll>prime;
-vector<ll>v;
-stack<ll>s;
-map<ll,ll >m;
-map<ll,ll >:: iterator it;
+stack<char>v;
 
 long long int gcd(long long int a,long long int b)
 {
@@ -36,11 +33,6 @@ long long int gcd(long long int a,long long int b)
         a=c;
     }
     return b;
-}
-double cal(double x)
-{
-    double y=sqrt(x);
-    return(x*x+2*y);
 }
 
 
@@ -76,31 +68,33 @@ int main()
     /*start main funciton*/
    ll t,n,a,b,c;
    cin>>t;
+   string s;
    while(t--)
    {
-       cin>>a;
-       if(a==1)
+       cin>>s;
+       while(!v.empty())
        {
-           cin>>b;
-           m[b]++;
-           s.push(b);
-
+           v.pop();
        }
-       else if(a==2)
+       for(i=0; i<s.size(); i++)
        {
-           c=s.top();
-           if(m[c]==1)
-            m.erase(c);
-           else
-            m[c]--;
-           s.pop();
+           if(v.empty())
+           {
+               v.push(s[i]);
+           }
+           else{
+            if(((s[i]==')' && v.top()=='(')||(s[i]=='}' && v.top()=='{')) ||(s[i]==']' && v.top()=='['))
+                   v.pop();
+            else
+                v.push(s[i]);
+           }
        }
+       if(v.empty())
+          cout<<"YES"<<endl;
        else
-       {
-           it=m.end();
-           it--;
-           cout<<it->first<<endl;
-       }
+        cout<<"NO"<<endl;
+
+
    }
 
 
