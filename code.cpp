@@ -21,7 +21,12 @@ const ll mod=1e9+7;
 const ll N=1e1;
 bool sive[N];
 vector<ll>prime;
-stack<char>v;
+stack<ll>s;
+stack<ll>s1;
+stack<ll>s2;
+vector<ll>v;
+vector<ll>v1;
+vector<ll>v2;
 
 long long int gcd(long long int a,long long int b)
 {
@@ -66,36 +71,89 @@ int main()
     }
 
     /*start main funciton*/
-   ll t,n,a,b,c;
-   cin>>t;
-   string s;
-   while(t--)
+   ll t,n,a,b,f,c;
+   cin>>f>>b>>c;
+   for(i=0; i<f; i++)
    {
-       cin>>s;
-       while(!v.empty())
-       {
-           v.pop();
-       }
-       for(i=0; i<s.size(); i++)
-       {
-           if(v.empty())
-           {
-               v.push(s[i]);
-           }
-           else{
-            if(((s[i]==')' && v.top()=='(')||(s[i]=='}' && v.top()=='{')) ||(s[i]==']' && v.top()=='['))
-                   v.pop();
-            else
-                v.push(s[i]);
-           }
-       }
-       if(v.empty())
-          cout<<"YES"<<endl;
-       else
-        cout<<"NO"<<endl;
-
+       cin>>a;
+       v.pb(a);
 
    }
+   for(i=0; i<b; i++)
+   {
+       cin>>a;
+       v1.pb(a);
+   }
+   for(i=0; i<c; i++)
+   {
+       cin>>a;
+       v2.pb(a);
+   }
+  ll sum=v[f-1];
+
+   for(i=f-2; i>=0; i--)
+   {
+       s.push(sum);
+       sum+=v[i];
+
+   }
+    s.push(sum);
+    sum=v1[b-1];
+    for(i=b-2; i>=0; i--)
+    {
+        s1.push(sum);
+        sum+=v1[i];
+    }
+    s1.push(sum);
+    sum=v2[c-1];
+    for(i=c-2; i>=0; i--)
+    {
+        s2.push(sum);
+        sum+=v2[i];
+    }
+    ll y=1;
+    s2.push(sum);
+    while(1)
+    {
+        if(s.empty()|| s1.empty() || s2.empty())
+        {
+          y=0;
+          break;
+        }
+        if(s.top()==s1.top() && s1.top()==s2.top())
+             break;
+        else if (s.top()==s1.top() && s2.top()>s.top())
+               s2.pop();
+        else if (s.top()==s1.top() && s2.top()<s.top())
+        {
+            s.pop();
+            s1.pop();
+        }
+        else if(s1.top()==s2.top() && s1.top()<s.top())
+               s.pop();
+        else if(s1.top()==s2.top() && s1.top()>s.top())
+        {
+            s1.pop();
+            s2.pop();
+        }
+        else if(s2.top()==s.top() && s1.top()>s.top())
+              s1.pop();
+        else if(s2.top()==s.top() && s1.top()<s.top())
+        {
+            s2.pop();
+            s.pop();
+        }
+        else if(s.top()>s1.top() && s.top()>s2.top())
+           s.pop();
+        else if(s1.top()>s.top() && s1.top()>s2.top())
+            s1.pop();
+        else
+            s2.pop();
+    }
+   if(y==0)
+      cout<<0<<endl;
+   else
+    cout<<s.top()<<" "<<s2.top()<<" " <<s1.top()<<endl;
 
 
     return 0;
